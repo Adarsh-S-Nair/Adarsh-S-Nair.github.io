@@ -21,7 +21,7 @@ aside {
 
 .sidebar-content {
     width: 100%;
-    padding-top: calc(100% - 10vh);
+    padding-top: 10vh;
 }
 
 canvas {
