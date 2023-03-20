@@ -16,10 +16,15 @@ window.onresize = () => {
 }
 
 let floorHeight;
+let squareWidth;
 let shapes = [];
 let collisions = 0;
 let timesteps = 1;
 let running;
+
+let getSquareWidth = () => {
+    squareWidth = canvas.width > canvas.height ? canvas.width / 12 : (canvas.height / 12);
+}
 
 let updateTimeSteps = (d) => {
     if (d == 4) timesteps = 8;
@@ -60,11 +65,11 @@ let calculate = () => {
     getFirstSquare();
 
     // Create the square
-    let squareWidth = d == 1 ? 100 : 300;
+    let width = d == 1 ? squareWidth : d == 2 ? squareWidth * 2 : squareWidth * 3;
     let square = new Square({
         id: 1,
-        width: squareWidth,
-        position: {x: canvas.width, y: floorHeight - squareWidth},
+        width: width,
+        position: {x: canvas.width, y: floorHeight - width},
         mass: Math.pow(100, d - 1),
         color: '#3a9182',
         constraint: shapes[0].width
@@ -93,7 +98,7 @@ let drawFloor = () => {
 
 let getFirstSquare = () => {
     // Draw the first square
-    let squareWidth = 100;
+    getSquareWidth();
     let square = new Square({
         id: 0,
         width: squareWidth,
