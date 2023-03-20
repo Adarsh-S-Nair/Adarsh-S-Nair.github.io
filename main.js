@@ -16,15 +16,10 @@ window.onresize = () => {
 }
 
 let floorHeight;
-let squareWidth;
 let shapes = [];
 let collisions = 0;
 let timesteps = 1;
 let running;
-
-let getSquareWidth = () => {
-    squareWidth = canvas.width > canvas.height ? canvas.width / 12 : (canvas.height / 12);
-}
 
 let updateTimeSteps = (d) => {
     if (d == 4) timesteps = 8;
@@ -65,7 +60,7 @@ let calculate = () => {
     getFirstSquare();
 
     // Create the square
-    let width = d == 1 ? squareWidth : d == 2 ? squareWidth * 2 : squareWidth * 3;
+    let width = d == 1 ? 100 : 300;
     let square = new Square({
         id: 1,
         width: width,
@@ -98,7 +93,7 @@ let drawFloor = () => {
 
 let getFirstSquare = () => {
     // Draw the first square
-    getSquareWidth();
+    let squareWidth = 100;
     let square = new Square({
         id: 0,
         width: squareWidth,
@@ -114,7 +109,7 @@ let getFirstSquare = () => {
 let animate = () => {
     if (!running ||
         (shapes[0].velocity == 0 && shapes[1].left > canvas.width) || 
-        (shapes[0].left > canvas.width)) {
+        (shapes[0].left > canvas.width && shapes[1].velocity > shapes[0].velocity)) {
         enableButton();
         return;
     }
